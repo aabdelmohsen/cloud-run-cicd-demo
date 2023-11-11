@@ -14,6 +14,7 @@ steps:
   args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/flask-demo-registry/flaskdemo:${SHORT_SHA}']
 
 - name: google/cloud-sdk
+  serviceAccount: 'terraform-sc@terraform-363717.iam.gserviceaccount.com'
   args: ['gcloud', 'run', 'deploy', 'flask-demo-run',
          '--image=us-central1-docker.pkg.dev/${PROJECT_ID}/flask-demo-registry/flaskdemo:${SHORT_SHA}',
          '--region',
@@ -22,5 +23,7 @@ steps:
          'managed',
          '--allow-unauthenticated',
          '--port',
-         '8000']
+         '8000',
+         '--service-account',
+         'terraform-sc@terraform-363717.iam.gserviceaccount.com']
 
